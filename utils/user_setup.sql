@@ -1,0 +1,5 @@
+\c postgres
+DROP USER IF EXISTS "M";
+CREATE USER "M" CREATEDB;
+\q
+
