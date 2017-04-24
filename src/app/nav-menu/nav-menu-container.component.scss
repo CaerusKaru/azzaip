@@ -1,0 +1,224 @@
+nav-menu-container {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+a.mat-tab-link {
+  line-height: 24px;
+  height: 100%;
+}
+
+.mat-button:hover .mat-button-focus-overlay {
+  opacity: 0 !important;
+}
+
+.md-visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  text-transform: none;
+  width: 1px;
+}
+
+$font-size:   10px !default;
+
+@function rem($multiplier) {
+  @return $multiplier * $font-size;
+}
+
+$subhead-font-size-base:   rem(1.600) !default;
+
+@mixin md-subhead() {
+  font-size: $subhead-font-size-base;
+  font-weight: 400;
+  letter-spacing: 0.010em;
+  line-height: rem(2.4);
+}
+
+.md-subhead {
+  @include md-subhead();
+}
+
+.site-sidenav {
+   background: #106CC8;
+}
+.site-sidenav md-content {
+  background: transparent;
+}
+.site-sidenav,
+.site-sidenav.md-locked-open-add-active,
+.site-sidenav.md-locked-open {
+  width:     150px;
+  min-width: 150px;
+  max-width: 150px;
+}
+.site-sidenav > * {
+  min-width: 125px;
+}
+.menu-heading {
+  display: block;
+  line-height: 32px;
+  margin: 0;
+  padding: 8px 16px 0;
+  text-align: left;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.54)
+}
+.course-menu,
+.course-menu ul {
+  list-style: none;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.course-menu li {
+  margin: 0;
+}
+.course-menu > li:nth-child(1) {
+  border-top: none;
+}
+.md-whiteframe-glow-z1 {
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14),
+  0px 0px 2px 2px rgba(0, 0, 0, 0.098),
+  0px 0px 5px 1px rgba(0, 0, 0, 0.084);
+}
+.course-menu > li {
+  // border-bottom: 1px solid #267ED5;
+}
+
+.course-menu .mat-button {
+  border-radius: 0;
+  color: white;
+  cursor: pointer;
+  display: block;
+  align-items: inherit;
+  line-height: 40px;
+  margin: 0;
+  max-height: 40px;
+  overflow: hidden;
+  padding: 0px 16px;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  width: 100%;
+}
+
+html[dir=rtl] .course-menu .mat-button,
+body[dir=rtl] .course-menu .mat-button {
+  unicode-bidi: embed;
+  text-align: right;
+}
+
+
+.course-menu .mat-button:hover,
+.course-menu .mat-button:focus {
+  background: #267ED5 !important;
+}
+.course-menu .mat-button md-icon {
+  color: white;
+}
+
+.course-menu md-select {
+
+  /* Override md-select margins.  With margins the nav-menu will look incorrect and causes mobile list
+     to not be scrollable.
+   */
+  margin: 0;
+  width: 100%;
+}
+
+.course-menu md-select md-select-label {
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+
+.course-menu md-select md-select-label span {
+  margin-right: auto;
+  padding-left: 13px;
+}
+
+.course-menu md-select .md-select-icon {
+  margin-right: 28px;
+}
+
+.course-menu button.mat-button::-moz-focus-inner {
+  padding: 0;
+}
+.course-menu .mat-button.active {
+  background: #267ED5;
+}
+
+html[dir=rtl] .menu-heading,
+body[dir=rtl] .menu-heading {
+  unicode-bidi: embed;
+  text-align: right;
+}
+
+.menu-toggle-list {
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  //height: 0; // restore this when Angular 4 allows for dynamic animation
+}
+
+.course-menu .menu-toggle-list button.mat-button {
+  display: block;
+  padding: 0 16px 0 32px;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.parent-list-item:last-child {
+  margin-bottom: 20px;
+
+  /* Prevent the hidden License link from causing a double bottom-border */
+  border-bottom: none;
+}
+.md-button-toggle .md-toggle-icon {
+  display: block;
+  margin-left: auto;
+  speak: none;
+  vertical-align: middle;
+  transform: rotate(180deg);
+  transition: transform 0.3s ease-in-out;
+}
+.md-button-toggle .md-toggle-icon.toggled {
+  transform: rotate(0deg);
+}
+
+.course-menu > menu-link > button.mat-button {
+  border-radius: 0;
+  color: white;
+  cursor: pointer;
+  display: block;
+  align-items: inherit;
+  line-height: 40px;
+  margin: 0;
+  max-height: 40px;
+  overflow: hidden;
+  padding: 0px 16px;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  width: 100%;
+}
+
+html[dir=rtl] .course-menu .mat-button,
+body[dir=rtl] .course-menu .mat-button {
+  unicode-bidi: embed;
+  text-align: right;
+}
+
+
+.course-menu .mat-button:hover,
+.course-menu .mat-button:focus {
+  background: #267ED5 !important;
+}
+.course-menu .mat-button md-icon {
+  color: white;
+}

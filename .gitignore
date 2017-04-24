@@ -4,6 +4,7 @@
 /dist
 /tmp
 *.log
+/out-tsc
 
 # dependencies
 /node_modules
@@ -28,6 +29,7 @@
 /.sass-cache
 /connect.lock
 /coverage/*
+/coverage
 /libpeerconnection.log
 npm-debug.log
 testem.log
@@ -47,4 +49,8 @@ Thumbs.db
 backend/cardcontrol/__pycache__/
 backend/backend/__pycache__/
 backend/cardcontrol/migrations/
+
+# System Files
+.DS_Store
+Thumbs.db
 

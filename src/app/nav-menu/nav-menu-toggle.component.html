@@ -1,0 +1,26 @@
+<li>
+  <button md-button
+          class="md-button-toggle"
+          (click)="toggle()">
+    <div fxFlex
+         fxLayout="row"
+         fxLayoutAlign="center center">
+      {{label}}
+      <span fxFlex></span>
+      <span class="md-toggle-icon"
+            fxLayoutAlign="center center"
+            [ngClass]="{'toggled' : isOpen()}">
+        <md-icon>keyboard_arrow_up</md-icon>
+      </span>
+    </div>
+    <span class="md-visually-hidden">
+      Toggle {{isOpen() ? 'expanded' : 'collapsed'}}
+    </span>
+  </button>
+
+  <ul id="course-menu-{{label | nospace}}"
+      class="menu-toggle-list"
+      [@openMenu]="isOpen().toString()">
+    <ng-content select="nav-menu-link"></ng-content>
+  </ul>
+</li>
