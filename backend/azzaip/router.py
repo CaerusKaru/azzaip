@@ -1,7 +1,7 @@
 """
 Database router for Azzaip application. The routes all Django-specific
 traffic, e.g. admin panel panel logins, to the default database and all
-cardcontrol-specific requests to an auxilliary, larger cardcontrol database.
+azzaip-specific requests to an auxilliary, larger azzaip database.
 """
 from django.conf import settings
 

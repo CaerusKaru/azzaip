@@ -81,8 +81,8 @@ python3.6 $d/../backend/manage.py createcachetable
 echo -e "${goodc}Repopulating database with test data.${noc}"
 psql -d postgres -U postgres < $d/../utils/recreate_database.sql &>>$d/../log/repopulate_db.log
 
-sql_c=$(python3.6 $d/../backend/manage.py sqlsequencereset cardcontrol)
-echo "${sql_c}" | psql -d cardcontrol -U postgres &>>$d/../log/sqlsequencereset.log
+sql_c=$(python3.6 $d/../backend/manage.py sqlsequencereset azzaip)
+echo "${sql_c}" | psql -d azzaip -U postgres &>>$d/../log/sqlsequencereset.log
 
 if [[ "${prod}" != "0" ]]; then
 echo -e "Starting Django development server."
