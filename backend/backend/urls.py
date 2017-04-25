@@ -18,13 +18,14 @@ from django.contrib import admin
 from tastypie.api import Api
 
 # Import our tastypie API resources
-from azzaip.api import MessageResource
+from azzaip.api import MessageResource, AccessResource
 # Import our github webook view
 from backend import views
 
 # Register a URL endpoint for each api resource
 API = Api(api_name='v1')
 API.register(MessageResource())
+API.register(AccessResource())
 
 # Route the actual URL patterns
 urlpatterns = [

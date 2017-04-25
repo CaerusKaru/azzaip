@@ -16,7 +16,7 @@ import json
 CACHE = False
 
 CARD_URL = 'http://34.193.86.61'
-AZZAIP_RESOURCE = 5
+AZZAIP_RESOURCE = '5'
 
 
 class MessageResource(ModelResource):
@@ -82,8 +82,8 @@ class AccessResource(ModelResource):
         # queryset = Message.objects.all()
         if CACHE:
             cache = SimpleCache()
-        list_allowed_methods = ['get', 'put', 'post']
-        detail_allowed_methods = ['get', 'put', 'post']
+        list_allowed_methods = ['get', 'post']
+        detail_allowed_methods = ['get', 'post']
         resource_name = 'access'
         authorization = Authorization()
         excludes = ['created_at', 'modified_at']
@@ -92,32 +92,65 @@ class AccessResource(ModelResource):
 
     @staticmethod
     def dehydrate(bundle):
-        if bundle.request.method == 'POST':
+        if bundle.request.method == 'POST' or bundle.request.method == 'PUT':
             user_id = bundle.data['id']
-            req = requests.get(CARD_URL + '/api/v1/access_point/?users__id=' + user_id + '&parent=' + AZZAIP_RESOURCE)
+            req = requests.get(CARD_URL + '/api/v1/access_point/?format=json&users__id=' + str(user_id) + '&parent=' + AZZAIP_RESOURCE)
             ap_json = json.loads(req.text)
             aps = []
-            for ap in ap_json:
-                aps.append(ap['resource_uri'])
+            for ap in ap_json['objects']:
+                # aps.append(ap['resource_uri'])
+                aps.append(ap)
             bundle.data['access_points'] = aps
 
         return bundle
 
+    def get_object_list(self, request):
+        """
+            populates the list endpoint
+        """
+        return []
 
-    def get_object_list( self, request ):
-        return None
-
-    def obj_get_list( self, request=None, **kwargs):
-        return None
+    def obj_get_list(self, request=None, **kwargs):
+        """
+            Don't know why you need this... but you do.
+        """
+        return self.get_object_list(request)
     
-    def get_resource_uri( self, bundle_or_obj ):
-        return None
+    def get_resource_uri(self, updated_bundle=None):
+        """
+            generates the URI for each object
+        """
+        if updated_bundle is not None:
+            kwargs = {
+                "resource_name": self._meta.resource_name,
+                "pk": str(updated_bundle.data['id'])
+            }
+        else:
+            kwargs = {
+                "resource_name": self._meta.resource_name,
+                "pk": "0"
+            }
+        if self._meta.api_name is not None:
+            kwargs['api_name'] = self._meta.api_name
+
+        return self._build_reverse_url("api_dispatch_detail", kwargs=kwargs)
     
-    def obj_get( self, request=None, **kwargs ):
-        return None
+    def obj_get(self, request=None, **kwargs):
+        pass
 
-    def obj_update( self, bundle, request=None, **kwargs ):
-        return None
+    def obj_update(self, bundle, request=None, **kwargs):
+        ''' Used for PUT requests '''
+        return self.dehydrate(bundle)
 
-    def obj_create( self, bundle, request=None, **kwargs):
-        return None
+    def obj_create(self, bundle, request=None, **kwargs):
+        """
+            For POST Requests
+            
+            This method blows. You know it. I know it.
+            Let's never speak of this again.
+        """
+        return bundle
+
+        
+    def rollback(self, bundles):
+        pass
