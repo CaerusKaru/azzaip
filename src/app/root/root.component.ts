@@ -10,20 +10,26 @@ export class RootComponent implements OnInit {
 
 
   public isOpen = true;
-  public utln: string;
-  public isAdmin = false;
   public courses;
   public activeLinkIndex;
+  public managed;
 
   constructor(
     private courseService: CourseService
   ) {
     this.courses = courseService.courses;
+    this.managed = courseService.managed;
   }
 
   ngOnInit() {
-    this.utln = this.courseService.utln;
-    this.isAdmin = this.courseService.isAdmin;
+  }
+
+  get utln () {
+    return this.courseService.utln;
+  }
+
+  get isAdmin () {
+    return this.courseService.isAdmin;
   }
   
   settings(){}
