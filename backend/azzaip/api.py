@@ -183,10 +183,7 @@ class ManageResource(ModelResource):
             user_id = bundle.data['id']
             req = requests.get(CARD_URL + '/api/v1/user_account/' + str(user_id) + '/?format=json')
             user_json = json.loads(req.text)
-            aps = []
-            for ap in user_json['access_points_managed']:
-                aps.append(ap)
-            bundle.data['access_points'] = aps
+            bundle.data['access_points'] = user_json['access_points_managed']
         return bundle
 
     def get_object_list(self, request):
