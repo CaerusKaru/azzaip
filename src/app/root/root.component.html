@@ -26,14 +26,17 @@
     <md-sidenav mode="side" [opened]="isOpen" class="site-sidenav hide-print">
       <nav-menu-container fxFlex color="accent">
         <nav-menu-header label="Courses">
-          <nav-menu-link *ngFor="let course of (courses | async).access_points" link="course/{{course.access_point_name}}">
+          <nav-menu-link *ngFor="let course of (courses | async).access_points"
+                         link="course/{{course.access_point_name}}">
             {{course.access_point_name}}
           </nav-menu-link>
         </nav-menu-header>
         <nav-menu-header label="Admin" *ngIf="isAdmin">
           <nav-menu-toggle label="Post">
-            <nav-menu-link link="">COMP 15</nav-menu-link>
-            <nav-menu-link link="">COMP 00</nav-menu-link>
+            <nav-menu-link *ngFor="let course of (managed | async).access_points"
+                           link="post/{{course.access_point_name}}">
+              {{course.access_point_name}}
+            </nav-menu-link>
           </nav-menu-toggle>
         </nav-menu-header>
       </nav-menu-container>

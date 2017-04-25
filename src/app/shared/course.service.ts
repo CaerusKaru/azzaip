@@ -10,16 +10,19 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 @Injectable()
 export class CourseService {
 
+  public managed: Observable<AccessPoint[]>;
   public courses: Observable<AccessPoint[]>;
   public userAccount: UserAccount;
 
   private _isAdmin = false;
   private _utln = 'masnes01';
+  private _managed: BehaviorSubject<AccessPoint[]> = new BehaviorSubject([]);
   private _courses: BehaviorSubject<AccessPoint[]> = new BehaviorSubject([]);
 
   constructor(
     private http: Http
   ) {
+    this.managed = this._managed.asObservable();
     this.courses = this._courses.asObservable();
     this.http.get(environment.CC_ENDPOINT + '/api/v1/user_account/?utln=' + this.utln)
       .map(this.extractData)
@@ -29,7 +32,9 @@ export class CourseService {
         this._isAdmin = this.userAccount.manager_level > 0;
         this.getCourses().subscribe(c => {
           this._courses.next(c);
-          console.log(c);
+        });
+        this.getManaged().subscribe(c => {
+          this._managed.next(c);
         });
       });
   }
@@ -48,11 +53,20 @@ export class CourseService {
       .catch(this.handleError);
   }
 
-  public makeMessage (message: CourseMessage): Observable<CourseMessage> {
+  public makeMessage (title: string, message: string, resource_uri: string): Observable<CourseMessage> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(environment.API_ENDPOINT + '/api/v1/message/', message, options)
+    const newMessage = {
+      author_uri: this.userAccount.resource_uri,
+      managed_resource_uri: resource_uri,
+      message_text: message,
+      message_title: title,
+      created_by: this.userAccount.resource_uri,
+      modified_by: this.userAccount.resource_uri
+    };
+
+    return this.http.post(environment.API_ENDPOINT + '/api/v1/message/', newMessage, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -68,6 +82,15 @@ export class CourseService {
     const options = new RequestOptions({ headers: headers });
 
     return this.http.post(environment.API_ENDPOINT + '/api/v1/access/', {id: this.userAccount.id}, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  public getManaged (): Observable<AccessPoint[]> {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.post(environment.API_ENDPOINT + '/api/v1/manage/', {id: this.userAccount.id}, options)
       .map(this.extractData)
       .catch(this.handleError);
   }

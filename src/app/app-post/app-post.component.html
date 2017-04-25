@@ -1,0 +1,25 @@
+<div fxFlexFill fxLayout="column" style="padding: 32px" fxLayoutAlign="start center">
+  <md-toolbar color="accent">Messages</md-toolbar>
+  <div fxFlex fxLayout="row" style="width: 100%">
+    <md-card fxFlex fxLayout="column">
+      <div fxFlex fxLayout="row">
+        <div fxFlex fxLayout="column">
+          <md-input-container>
+            <input mdInput type="text" placeholder="Post Title" required [(ngModel)]="title">
+          </md-input-container>
+          <md-error *ngIf="errorTitle">The title cannot be blank</md-error>
+          <md-input-container>
+            <textarea mdTextareaAutosize
+                      [(ngModel)]="message"
+                      maxRows="15"
+                      minRows="10"
+                      mdInput placeholder="Post Content" required></textarea>
+          </md-input-container>
+          <md-error *ngIf="errorMessage">The message cannot be blank</md-error>
+        </div>
+      </div>
+      <span fxFlex></span>
+      <button md-raised-button color="primary" (click)="post()">POST</button>
+    </md-card>
+  </div>
+</div>

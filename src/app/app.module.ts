@@ -13,12 +13,14 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppCourseComponent } from './app-course/app-course.component';
 import {CourseService} from './shared/course.service';
+import { AppPostComponent } from './app-post/app-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RootComponent,
-    AppCourseComponent
+    AppCourseComponent,
+    AppPostComponent
   ],
   imports: [
     BrowserModule,
