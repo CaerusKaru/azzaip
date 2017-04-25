@@ -13,7 +13,7 @@ class Message(models.Model):
     """
 
     author_uri = models.CharField(max_length=40)
-    managed_resource_uri = models.CharField(max_length=40)
+    course_uri = models.CharField(max_length=40)
     message_text = models.CharField(max_length=500)
     message_title = models.CharField(max_length=120)
 
