@@ -184,7 +184,7 @@ class ManageResource(ModelResource):
             req = requests.get(CARD_URL + '/api/v1/user_account/' + str(user_id) + '/?format=json')
             user_json = json.loads(req.text)
             aps = []
-            for ap in user_json['object']['access_points_managed']:
+            for ap in user_json['access_points_managed']:
                 # aps.append(ap['resource_uri'])
                 ap_req = requests.get(CARD_URL + ap + '?format=json')
                 ap_json = json.loads(ap_req.text)
