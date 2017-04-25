@@ -54,3 +54,4 @@ backend/cardcontrol/migrations/
 .DS_Store
 Thumbs.db
 
+.idea

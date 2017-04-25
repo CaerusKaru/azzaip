@@ -1,14 +1,36 @@
 <div fxFill fxLayout="column">
-  <md-toolbar color="primary">AzziaP</md-toolbar>
+  <md-toolbar color="primary">
+    <button md-icon-button (click)="toggleSidenav()">
+      <md-icon>menu</md-icon>
+    </button>
+    <span fxLayoutAlign="center center" style="padding: 5px 35px 0 0">
+      <a routerLink=""
+         (click)="activeLinkIndex = 0">
+        <img src="../assets/azzaip-white.svg"
+             height="42"
+             width="150"
+             fxLayoutAlign="center center" />
+      </a>
+    </span>
+    <span fxFlex></span>
+    <md-menu #appMenu="mdMenu" y-position="below" [overlapTrigger]="false">
+      <button md-menu-item (click)="settings()"> Settings </button>
+      <button md-menu-item (click)="logOut()"> Log Out </button>
+    </md-menu>
+
+    <button md-button [mdMenuTriggerFor]="appMenu" fxLayoutAlign="end stretch">
+      {{utln}}
+    </button>
+  </md-toolbar>
   <md-sidenav-container fxFlex>
-    <md-sidenav mode="side" opened="true" class="site-sidenav hide-print" style="background: #106CC8">
-      <nav-menu-container>
+    <md-sidenav mode="side" [opened]="isOpen" class="site-sidenav hide-print">
+      <nav-menu-container fxFlex color="accent">
         <nav-menu-header label="Courses">
-          <nav-menu-link link="">COMP 15</nav-menu-link>
-          <nav-menu-link link="">COMP 00</nav-menu-link>
-          <nav-menu-link link="">COMP 20</nav-menu-link>
+          <nav-menu-link *ngFor="let course of (courses | async).access_points" link="course/{{course.access_point_name}}">
+            {{course.access_point_name}}
+          </nav-menu-link>
         </nav-menu-header>
-        <nav-menu-header label="Admin">
+        <nav-menu-header label="Admin" *ngIf="isAdmin">
           <nav-menu-toggle label="Post">
             <nav-menu-link link="">COMP 15</nav-menu-link>
             <nav-menu-link link="">COMP 00</nav-menu-link>
@@ -16,6 +38,6 @@
         </nav-menu-header>
       </nav-menu-container>
     </md-sidenav>
-    <div>Other content!</div>
+    <router-outlet></router-outlet>
   </md-sidenav-container>
 </div>

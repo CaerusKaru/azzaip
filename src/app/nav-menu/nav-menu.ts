@@ -1,20 +1,21 @@
 import {
   Component, Input, ViewEncapsulation, QueryList,
-  OnDestroy, ContentChildren, AfterViewInit
+  OnDestroy, ContentChildren, AfterViewInit, ElementRef, Renderer2, Directive
 } from '@angular/core';
-import {NavMenuService} from "./shared/nav-menu.service";
-import {animate, style, transition, state, trigger} from "@angular/animations";
-import {Router} from "@angular/router";
-import {Observable} from "rxjs/Observable";
+import {NavMenuService} from './shared/nav-menu.service';
+import {animate, style, transition, state, trigger} from '@angular/animations';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
 
 let uniqueId = 0;
 
 @Component({
   host: {
-    '[attr.id]': 'id'
+    '[attr.id]': 'id',
+    '[class.nav-link]': 'true'
   },
   selector: 'nav-menu-link',
-  templateUrl: './nav-menu-link.component.html',
+  templateUrl: './nav-menu-link.html',
   encapsulation: ViewEncapsulation.None
 })
 export class NavMenuLinkComponent {
@@ -43,9 +44,9 @@ export class NavMenuLinkComponent {
     '[attr.id]': 'id'
   },
   selector: 'nav-menu-toggle',
-  templateUrl: './nav-menu-toggle.component.html',
+  templateUrl: './nav-menu-toggle.html',
   animations: [
-    // TODO make this into AnimationBuilder with Angular 4.1-beta.2
+    // TODO make this into AnimationBuilder with Angular 4.1-rc.1
     trigger('openMenu', [
       state('false', style({
         height: 0,
@@ -103,7 +104,7 @@ export class NavMenuToggleComponent implements AfterViewInit, OnDestroy {
 
 @Component({
   selector: 'nav-menu-header',
-  templateUrl: './nav-menu-header.component.html',
+  templateUrl: './nav-menu-header.html',
   encapsulation: ViewEncapsulation.None
 })
 export class NavMenuHeaderComponent {
@@ -112,9 +113,42 @@ export class NavMenuHeaderComponent {
 }
 
 @Component({
+  host: {
+    '[class.nav-menu]': 'true'
+  },
   selector: 'nav-menu-container',
-  templateUrl: './nav-menu-container.component.html',
-  styleUrls: ['./nav-menu-container.component.scss'],
+  templateUrl: './nav-menu-container.html',
+  styleUrls: ['./nav-menu.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class NavMenuContainerComponent { }
+export class NavMenuContainerComponent {
+  private _color: string;
+
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
+
+  /** The color of the nav-menu. Can be primary, accent, or warn. */
+  @Input()
+  get color(): string {
+    return this._color;
+  }
+
+  set color(value: string) {
+    this._updateColor(value);
+  }
+
+  private _updateColor(newColor: string) {
+    this._setElementColor(this._color, false);
+    this._setElementColor(newColor, true);
+    this._color = newColor;
+  }
+
+  private _setElementColor(color: string, isAdd: boolean) {
+    if (color && color !== '') {
+      if (!isAdd) {
+        this.renderer.removeClass(this.elementRef.nativeElement, `mat-${color}`);
+      } else {
+        this.renderer.addClass(this.elementRef.nativeElement, `mat-${color}`);
+      }
+    }
+  }
+}

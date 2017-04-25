@@ -1,14 +1,5 @@
-nav-menu-container {
+:host {
   font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-a.mat-tab-link {
-  line-height: 24px;
-  height: 100%;
-}
-
-.mat-button:hover .mat-button-focus-overlay {
-  opacity: 0 !important;
 }
 
 .md-visually-hidden {
@@ -42,18 +33,17 @@ $subhead-font-size-base:   rem(1.600) !default;
   @include md-subhead();
 }
 
-.site-sidenav {
-   background: #106CC8;
+a.mat-tab-link {
+  line-height: 24px;
+  height: 100%;
 }
-.site-sidenav md-content {
-  background: transparent;
-}
+
 .site-sidenav,
 .site-sidenav.md-locked-open-add-active,
 .site-sidenav.md-locked-open {
-  width:     150px;
-  min-width: 150px;
-  max-width: 150px;
+  width:     153px;
+  min-width: 153px;
+  max-width: 153px;
 }
 .site-sidenav > * {
   min-width: 125px;
@@ -65,7 +55,7 @@ $subhead-font-size-base:   rem(1.600) !default;
   padding: 8px 16px 0;
   text-align: left;
   width: 100%;
-  color: rgba(255, 255, 255, 0.54)
+  opacity: 0.54;
 }
 .course-menu,
 .course-menu ul {
@@ -89,36 +79,29 @@ $subhead-font-size-base:   rem(1.600) !default;
   // border-bottom: 1px solid #267ED5;
 }
 
-.course-menu .mat-button {
-  border-radius: 0;
-  color: white;
-  cursor: pointer;
-  display: block;
-  align-items: inherit;
-  line-height: 40px;
-  margin: 0;
-  max-height: 40px;
-  overflow: hidden;
-  padding: 0px 16px;
-  text-align: left;
-  text-decoration: none;
-  white-space: normal;
-  width: 100%;
+.course-menu {
+  button.mat-button {
+    border-radius: 0;
+    //color: white;
+    cursor: pointer;
+    display: block;
+    align-items: inherit;
+    line-height: 40px;
+    margin: 0;
+    max-height: 40px;
+    overflow: hidden;
+    padding: 0px 16px;
+    text-align: left;
+    text-decoration: none;
+    white-space: normal;
+    width: 100%;
+  }
 }
 
 html[dir=rtl] .course-menu .mat-button,
 body[dir=rtl] .course-menu .mat-button {
   unicode-bidi: embed;
   text-align: right;
-}
-
-
-.course-menu .mat-button:hover,
-.course-menu .mat-button:focus {
-  background: #267ED5 !important;
-}
-.course-menu .mat-button md-icon {
-  color: white;
 }
 
 .course-menu md-select {
@@ -146,9 +129,6 @@ body[dir=rtl] .course-menu .mat-button {
 
 .course-menu button.mat-button::-moz-focus-inner {
   padding: 0;
-}
-.course-menu .mat-button.active {
-  background: #267ED5;
 }
 
 html[dir=rtl] .menu-heading,
@@ -187,38 +167,8 @@ body[dir=rtl] .menu-heading {
   transform: rotate(180deg);
   transition: transform 0.3s ease-in-out;
 }
+
 .md-button-toggle .md-toggle-icon.toggled {
   transform: rotate(0deg);
 }
 
-.course-menu > menu-link > button.mat-button {
-  border-radius: 0;
-  color: white;
-  cursor: pointer;
-  display: block;
-  align-items: inherit;
-  line-height: 40px;
-  margin: 0;
-  max-height: 40px;
-  overflow: hidden;
-  padding: 0px 16px;
-  text-align: left;
-  text-decoration: none;
-  white-space: normal;
-  width: 100%;
-}
-
-html[dir=rtl] .course-menu .mat-button,
-body[dir=rtl] .course-menu .mat-button {
-  unicode-bidi: embed;
-  text-align: right;
-}
-
-
-.course-menu .mat-button:hover,
-.course-menu .mat-button:focus {
-  background: #267ED5 !important;
-}
-.course-menu .mat-button md-icon {
-  color: white;
-}

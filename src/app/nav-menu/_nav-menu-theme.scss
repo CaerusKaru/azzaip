@@ -1,0 +1,41 @@
+// Import all the tools needed to customize the theme and extract parts of it
+@import '~@angular/material/theming';
+
+@mixin _nav-menu-color($palette) {
+  background: mat-color($palette);
+  color: mat-color($palette, default-contrast);
+}
+
+@mixin nav-menu-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .nav-menu {
+    background: transparent;
+    color: mat-color($foreground, text);
+
+    &.mat-primary {
+      @include _nav-menu-color($primary);
+    }
+
+    &.mat-accent {
+      @include _nav-menu-color($accent);
+    }
+
+    &.mat-warn {
+      @include _nav-menu-color($warn);
+    }
+  }
+  .mat-button {
+    &.active {
+      background: rgba(mat-color($foreground, text), 0.4);
+    }
+    &:hover,
+    &:focus {
+      background: rgba(mat-color($foreground, text), 0.4);
+    }
+  }
+}

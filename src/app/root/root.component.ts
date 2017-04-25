@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CourseService} from '../shared/course.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RootComponent implements OnInit {
 
-  constructor() { }
+
+  public isOpen = true;
+  public utln: string;
+  public isAdmin = false;
+  public courses;
+
+  constructor(
+    private courseService: CourseService
+  ) {
+    this.courses = courseService.courses;
+  }
 
   ngOnInit() {
+    this.utln = this.courseService.utln;
+    this.isAdmin = this.courseService.isAdmin;
+  }
+
+  public toggleSidenav() {
+    this.isOpen = !this.isOpen;
   }
 
 }

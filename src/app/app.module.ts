@@ -11,11 +11,14 @@ import {NavMenuModule} from './nav-menu/index';
 import { RootComponent } from './root/root.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AppCourseComponent } from './app-course/app-course.component';
+import {CourseService} from './shared/course.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RootComponent
+    RootComponent,
+    AppCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     NavMenuModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CourseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
