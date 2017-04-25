@@ -62,14 +62,14 @@ if [[ "${prod}" == "0" ]]; then
     else
         $d/stop.sh
     fi
+    echo -e "${goodc}Starting Database.${noc}"
+    $d/../utils/start_db.sh
 fi
 
 if [[ "${abld}" == "0" ]]; then
     $d/ng-build.sh
 fi;
 
-echo -e "${goodc}Starting Database.${noc}"
-$d/../utils/start_db.sh
 
 if [[ "${prod}" == "0" ]]; then
     echo -e "${goodc}Starting Redis for memcaching.${noc}"
