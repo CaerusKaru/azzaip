@@ -87,7 +87,7 @@ echo "${sql_c}" | psql -d azzaip -U postgres &>>$d/../log/sqlsequencereset.log
 if [[ "${prod}" != "0" ]]; then
 echo -e "Starting Django development server."
 expect <<- DONE
-    spawn -ignore HUP bash -ilc "python3.6 $d/../backend/manage.py runserver" 
+    spawn -ignore HUP bash -ilc "python3.6 $d/../backend/manage.py runserver 0.0.0.0:7000" 
     expect -re ".*Quit the server with CONTROL-C.*"
 DONE
 fi
@@ -99,7 +99,7 @@ echo -e "${goodc}Starting frontent process.${noc}"
 
 expect <<- DONE
     set timeout 120
-    spawn -ignore HUP bash -ilc "ng serve &" 
+    spawn -ignore HUP bash -ilc "ng serve --port 4201 &" 
     expect -re ".*webpack: Compiled successfully.*"
 DONE
 fi
