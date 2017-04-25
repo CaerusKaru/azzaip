@@ -56,10 +56,12 @@ if [[ "${prod}" == "0" ]]; then
 fi
 
 echo -e "${goodc}Stopping server.${noc}"
-if [[ "$aoff" == "0" ]]; then
-    $d/stop.sh -a
-else
-    $d/stop.sh
+if [[ "${prod}" == "0" ]]; then
+    if [[ "$aoff" == "0" ]]; then
+        $d/stop.sh -a
+    else
+        $d/stop.sh
+    fi
 fi
 
 if [[ "${abld}" == "0" ]]; then
