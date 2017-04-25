@@ -185,10 +185,7 @@ class ManageResource(ModelResource):
             user_json = json.loads(req.text)
             aps = []
             for ap in user_json['access_points_managed']:
-                # aps.append(ap['resource_uri'])
-                ap_req = requests.get(CARD_URL + ap + '?format=json')
-                ap_json = json.loads(ap_req.text)
-                aps.append(ap_json)
+                aps.append(ap)
             bundle.data['access_points'] = aps
         return bundle
 
