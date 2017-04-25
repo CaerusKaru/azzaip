@@ -31,10 +31,10 @@ export class CourseService {
         this.userAccount = data[0];
         this._isAdmin = this.userAccount.manager_level > 0;
         this.getCourses().subscribe(c => {
-          this._courses.next(c);
+          this._courses.next(c.access_points);
         });
         this.getManaged().subscribe(c => {
-          this._managed.next(c);
+          this._managed.next(c.access_points);
         });
       });
   }
@@ -48,7 +48,7 @@ export class CourseService {
   }
 
   public getMessages (managed_resource_uri: string): Observable<CourseMessage[]> {
-    return this.http.get(environment.API_ENDPOINT + '/api/v1/message/?managed_resource_uri=' + managed_resource_uri)
+    return this.http.get(environment.API_ENDPOINT + '/api/v1/message/?course_uri=' + managed_resource_uri)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -59,7 +59,7 @@ export class CourseService {
 
     const newMessage = {
       author_uri: this.userAccount.resource_uri,
-      managed_resource_uri: resource_uri,
+      course_uri: resource_uri,
       message_text: message,
       message_title: title,
       created_by: this.userAccount.resource_uri,
@@ -77,7 +77,7 @@ export class CourseService {
       .catch(this.handleError);
   }
 
-  public getCourses (): Observable<AccessPoint[]> {
+  public getCourses (): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
@@ -86,7 +86,7 @@ export class CourseService {
       .catch(this.handleError);
   }
 
-  public getManaged (): Observable<AccessPoint[]> {
+  public getManaged (): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 

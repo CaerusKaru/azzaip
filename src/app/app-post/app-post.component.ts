@@ -24,7 +24,7 @@ export class AppPostComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.route.params.subscribe(data => {
-      this.course = data;
+      this.course = data.course;
     });
   }
 
@@ -45,17 +45,18 @@ export class AppPostComponent implements OnInit {
       return;
     }
 
-    const res = this._managed.access_points.filter(a => a.access_point_name === this.course);
+    const res = this._managed.filter(a => a.access_point_name === this.course);
 
-    if (!res) {
-      console.log(res, 'res');
+    console.log(res[0].resource_uri);
+
+    if (!res || res.length === 0) {
       this.snackbar.open('Unable to post message', '', {
         duration: 1750
       });
       return;
     }
 
-    this.courseService.makeMessage(this.title, this.message, res.parent).subscribe(
+    this.courseService.makeMessage(this.title, this.message, res[0].resource_uri).subscribe(
       data => {
         this.snackbar.open('Message posted!', '', {
           duration: 1750

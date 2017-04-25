@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  MdButtonModule, MdCardModule, MdIconModule, MdInputModule, MdMenuModule, MdSidenavModule, MdSnackBarModule,
+  MdButtonModule, MdCardModule, MdIconModule, MdInputModule, MdListModule, MdMenuModule, MdSidenavModule,
+  MdSnackBarModule,
   MdTabsModule,
   MdToolbarModule
 } from '@angular/material';
@@ -20,7 +21,8 @@ import {
     MdTabsModule,
     MdCardModule,
     MdInputModule,
-    MdSnackBarModule
+    MdSnackBarModule,
+    MdListModule
   ]
 })
 export class AppMaterialModule { }

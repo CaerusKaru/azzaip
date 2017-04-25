@@ -1,14 +1,26 @@
-<div fxLayoutAlign="space-between center" style="padding: 32px">
+<div fxLayoutAlign="space-between start" style="padding: 32px">
   <div fxLayout="column" fxFlex="35">
     <md-toolbar color="accent">Messages</md-toolbar>
     <md-card>
-      Where the list goes
+      <md-nav-list fxLayout="column">
+        <md-list-item *ngFor="let message of (messages | async); let i = index"
+                      fxLayout="row"
+                      (click)="openMessage(message, i)">
+          <span fxFlex>{{message.message_title}}</span>
+        </md-list-item>
+      </md-nav-list>
     </md-card>
   </div>
-  <div fxLayout="column" fxFlex="60" fxFlexFill>
+  <div fxLayout="column" fxFlex="60" fxFlexFill *ngIf="!selectedMessage">
     <md-toolbar color="accent">Message Content</md-toolbar>
     <md-card>
-      Where the message goes
+      Please select a message on the left
+    </md-card>
+  </div>
+  <div fxLayout="column" fxFlex="60" fxFlexFill *ngIf="selectedMessage">
+    <md-toolbar color="accent">{{selectedMessage.message_title}}</md-toolbar>
+    <md-card>
+      {{selectedMessage.message_text}}
     </md-card>
   </div>
 </div>

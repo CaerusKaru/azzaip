@@ -4,8 +4,7 @@
       <md-icon>menu</md-icon>
     </button>
     <span fxLayoutAlign="center center" style="padding: 5px 35px 0 0">
-      <a routerLink=""
-         (click)="activeLinkIndex = 0">
+      <a routerLink="">
         <img src="../assets/azzaip-white.svg"
              height="42"
              width="150"
@@ -26,14 +25,14 @@
     <md-sidenav mode="side" [opened]="isOpen" class="site-sidenav hide-print">
       <nav-menu-container fxFlex color="accent">
         <nav-menu-header label="Courses">
-          <nav-menu-link *ngFor="let course of (courses | async).access_points"
+          <nav-menu-link *ngFor="let course of (courses | async)"
                          link="course/{{course.access_point_name}}">
             {{course.access_point_name}}
           </nav-menu-link>
         </nav-menu-header>
         <nav-menu-header label="Admin" *ngIf="isAdmin">
           <nav-menu-toggle label="Post">
-            <nav-menu-link *ngFor="let course of (managed | async).access_points"
+            <nav-menu-link *ngFor="let course of (managed | async)"
                            link="post/{{course.access_point_name}}">
               {{course.access_point_name}}
             </nav-menu-link>

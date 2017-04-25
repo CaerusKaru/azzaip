@@ -31,13 +31,15 @@ export class RootComponent implements OnInit {
   get isAdmin () {
     return this.courseService.isAdmin;
   }
-  
-  settings(){}
-  logOut(){}
-
 
   public toggleSidenav() {
     this.isOpen = !this.isOpen;
+  }
+
+  public settings () {
+  }
+
+  public logOut () {
   }
 
 }
