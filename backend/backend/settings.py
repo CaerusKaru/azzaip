@@ -24,7 +24,7 @@ GITHUB_WEBHOOK_KEY = '4QrbY8lhgwh7cwo6XuyUQguqhE8UtGk83ouruCgYV83p4GPpP3lxGSwBq8
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.193.86.61', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['52.204.216.32', '34.193.86.61', '127.0.0.1', 'localhost']
 
 TASTYPIE_CANNED_ERROR = "Sorry, the Azzaip API did not understand your request!"
 
