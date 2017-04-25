@@ -15,7 +15,7 @@ import json
 
 CACHE = False
 
-#CARD_URL = 'http://34.193.86.61'
+# CARD_URL = 'http://34.193.86.61'
 CARD_URL = 'http://localhost:8000'
 AZZAIP_RESOURCE = '5'
 
@@ -39,7 +39,7 @@ class MessageResource(ModelResource):
         authorization = Authorization()
         excludes = ['created_at', 'modified_at']
         filtering = {
-            'managed_resource_uri': ALL,
+            'course_uri': ALL,
             'author_uri' : ALL,
             'created_at' : ALL,
             'modified_at' : ALL
