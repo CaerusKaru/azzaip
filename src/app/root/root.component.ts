@@ -13,6 +13,7 @@ export class RootComponent implements OnInit {
   public utln: string;
   public isAdmin = false;
   public courses;
+  public activeLinkIndex;
 
   constructor(
     private courseService: CourseService
@@ -24,6 +25,10 @@ export class RootComponent implements OnInit {
     this.utln = this.courseService.utln;
     this.isAdmin = this.courseService.isAdmin;
   }
+  
+  settings(){}
+  logOut(){}
+
 
   public toggleSidenav() {
     this.isOpen = !this.isOpen;

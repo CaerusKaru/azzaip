@@ -15,8 +15,8 @@ import json
 
 CACHE = False
 
-# CARD_URL = 'http://34.193.86.61'
-CARD_URL = 'http://localhost:8000'
+CARD_URL = 'http://34.193.86.61'
+# CARD_URL = 'http://localhost:8000'
 AZZAIP_RESOURCE = '5'
 
 
