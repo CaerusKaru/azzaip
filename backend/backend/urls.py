@@ -18,7 +18,7 @@ from django.contrib import admin
 from tastypie.api import Api
 
 # Import our tastypie API resources
-from azzaip.api import MessageResource, AccessResource
+from azzaip.api import MessageResource, AccessResource, ManageResource
 # Import our github webook view
 from backend import views
 
@@ -26,6 +26,7 @@ from backend import views
 API = Api(api_name='v1')
 API.register(MessageResource())
 API.register(AccessResource())
+API.register(ManageResource())
 
 # Route the actual URL patterns
 urlpatterns = [
