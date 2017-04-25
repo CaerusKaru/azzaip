@@ -154,3 +154,91 @@ class AccessResource(ModelResource):
         
     def rollback(self, bundles):
         pass
+      
+      
+class ManageResource(ModelResource):
+    """
+    Tastypie API resource for Message.
+    """
+    class Meta:
+        """
+        Additional configuration for fields, allowed HTTP methods,
+        etc. for this API resource.
+        """
+        always_return_data = True
+        # queryset = Message.objects.all()
+        if CACHE:
+            cache = SimpleCache()
+        list_allowed_methods = ['get', 'post']
+        detail_allowed_methods = ['get', 'post']
+        resource_name = 'manage'
+        authorization = Authorization()
+        excludes = ['created_at', 'modified_at']
+        filtering = {
+        }
+
+    @staticmethod
+    def dehydrate(bundle):
+        if bundle.request.method == 'POST' or bundle.request.method == 'PUT':
+            user_id = bundle.data['id']
+            req = requests.get(CARD_URL + '/api/v1/user_account/' + str(user_id) + '/?format=json')
+            user_json = json.loads(req.text)
+            aps = []
+            for ap in user_json['objects']['access_points_managed']:
+                # aps.append(ap['resource_uri'])
+                ap_req = requests.get(CARD_URL + ap + '?format=json')
+                ap_json = json.loads(ap_req.text)
+                aps.append(ap_json)
+            bundle.data['access_points'] = aps
+        return bundle
+
+    def get_object_list(self, request):
+        """
+            populates the list endpoint
+        """
+        return []
+
+    def obj_get_list(self, request=None, **kwargs):
+        """
+            Don't know why you need this... but you do.
+        """
+        return self.get_object_list(request)
+    
+    def get_resource_uri(self, updated_bundle=None):
+        """
+            generates the URI for each object
+        """
+        if updated_bundle is not None:
+            kwargs = {
+                "resource_name": self._meta.resource_name,
+                "pk": str(updated_bundle.data['id'])
+            }
+        else:
+            kwargs = {
+                "resource_name": self._meta.resource_name,
+                "pk": "0"
+            }
+        if self._meta.api_name is not None:
+            kwargs['api_name'] = self._meta.api_name
+
+        return self._build_reverse_url("api_dispatch_detail", kwargs=kwargs)
+    
+    def obj_get(self, request=None, **kwargs):
+        pass
+
+    def obj_update(self, bundle, request=None, **kwargs):
+        ''' Used for PUT requests '''
+        return self.dehydrate(bundle)
+
+    def obj_create(self, bundle, request=None, **kwargs):
+        """
+            For POST Requests
+            
+            This method blows. You know it. I know it.
+            Let's never speak of this again.
+        """
+        return bundle
+
+        
+    def rollback(self, bundles):
+        pass
