@@ -2,7 +2,7 @@
 Tastypie API definition for CardControl application.
 """
 
-from cardcontrol.models import Message
+from azzaip.models import Message
 from tastypie.resources import ModelResource
 from tastypie.authorization import Authorization
 from tastypie.resources import ALL, ALL_WITH_RELATIONS

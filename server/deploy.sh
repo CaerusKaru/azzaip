@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-log='/home/ec2-user/cardcontrol/log/deploysh.log'
+log='/home/ec2-user/azzaip/log/deploysh.log'
 branch='dev'
 echo "Deployment Script."
 if [[ ! -w $log ]]; then echo "" > $log; fi
